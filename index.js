@@ -209,27 +209,30 @@ app.get('/watchListsdata', async (req, res) => {
 app.delete('/watchListsdata/:id', async (req, res) => {
   const id = req.params.id;
   console.log('Received ID for deletion:', id);
-  
+
   if (!ObjectId.isValid(id)) {
-    return res.status(400).send({ message: 'Invalid ID format' });
+      console.error("Invalid ID format:", id);
+      return res.status(400).send({ message: "Invalid ID format" });
   }
-  
+
   const query = { _id: new ObjectId(id) };
-  
+
   try {
-    const result = await wicCollection.deleteOne(query);
-    console.log('Delete result:', result);
-    
-    if (result.deletedCount === 0) {
-      return res.status(404).send({ message: 'Data not found' });
-    }
-    
-    res.send({ message: 'Deleted successfully' });
+      const result = await wicCollection.deleteOne(query);
+      console.log("Delete result:", result);
+
+      if (result.deletedCount === 0) {
+          console.warn("Data not found for ID:", id);
+          return res.status(404).send({ message: "Data not found" });
+      }
+
+      res.status(200).send({ message: "Deleted successfully" });
   } catch (error) {
-    console.error('Error deleting data:', error);
-    res.status(500).send({ message: 'Error deleting data' });
+      console.error("Error deleting data:", error);
+      res.status(500).send({ message: "Error deleting data" });
   }
 });
+
 
     
 
