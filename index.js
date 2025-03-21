@@ -4,6 +4,7 @@ const cors = require('cors');
 const { MongoClient, ServerApiVersion,ObjectId } = require('mongodb');
 const port = process.env.PORT || 5222 ;
 const app = express() ;
+const http = require('http');
 
 app.use(cors());
 app.use(express.json()) ;
@@ -19,7 +20,7 @@ app.listen(port,()=>{
 })
 
 // -----------
-const http = require('http');
+
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
