@@ -18,7 +18,15 @@ app.listen(port,()=>{
     console.log(`port is raning : ${port}`);
 })
 
+// -----------
+const http = require('http');
 
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end("Hello World");
+}).on('connection', function(socket) {
+  socket.setTimeout(10000);
+}).listen(3000);
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS}@cluster0.zxihh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
