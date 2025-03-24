@@ -71,7 +71,7 @@ async function run() {
     });
   // ---------------- post-----//
 // post All data
-    app.post('/alldata', async (req, res) => {
+    app.post('/postdata', async (req, res) => {
       const addata = req.body;
       console.log('All Data-------------', addata);
       
