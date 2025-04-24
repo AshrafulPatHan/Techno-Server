@@ -144,10 +144,6 @@ app.patch('/comant', async (req, res) => {
 });
 
 
-
-
-
-
 // ---------------- get-----//
       // get user data
     app.get('/datas', async (req, res) => {
@@ -241,11 +237,6 @@ app.delete('/watchListsdata/:id', async (req, res) => {
       res.status(500).send({ message: "Error deleting data" });
   }
 });
-
-
-    
-
-
 
 
 
