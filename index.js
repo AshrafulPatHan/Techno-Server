@@ -210,33 +210,30 @@ app.get('/watchListsdata', async (req, res) => {
         res.status(500).send({ message: 'Internal Server Error' });
       }
     });
-// delete method
+
+const { ObjectId } = require('mongodb');
+
+// delet method
+
 app.delete('/watchListsdata/:id', async (req, res) => {
-  const id = req.params.id;
-  console.log('Received ID for deletion:', id);
+    const id = req.params.id;
+    try {
+        const result = await wicCollection.deleteOne({ _id: new ObjectId(id) }); // ObjectId ব্যবহার করুন
+        console.log("Delete result:", result);
 
-  if (!ObjectId.isValid(id)) {
-      console.error("Invalid ID format:", id);
-      return res.status(400).send({ message: "Invalid ID format" });
-  }
+        if (result.deletedCount === 0) {
+            console.warn("Data not found for ID:", id);
+            return res.status(404).send({ message: "Data not found" });
+        }
 
-  const query = { _id: new ObjectId(id) };
-
-  try {
-      const result = await wicCollection.deleteOne(query);
-      console.log("Delete result:", result);
-
-      if (result.deletedCount === 0) {
-          console.warn("Data not found for ID:", id);
-          return res.status(404).send({ message: "Data not found" });
-      }
-
-      res.status(200).send({ message: "Deleted successfully" });
-  } catch (error) {
-      console.error("Error deleting data:", error);
-      res.status(500).send({ message: "Error deleting data" });
-  }
+        res.status(200).send({ message: "Deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting data:", error);
+        res.status(500).send({ message: "Error deleting data" });
+    }
 });
+
+
 
 
 

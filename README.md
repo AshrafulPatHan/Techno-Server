@@ -25,9 +25,9 @@ This is the **server-side** application for the **TechnoBloger Website**, a plat
 ## Live Server
 
 The live backend server is hosted and accessible at the following link:
-Live Link: https://techno-server.onrender.com
+Live Link: http://localhost:5222
 <br/>
-[Live Tech Blog Server](https://techno-server.onrender.com)
+[Live Tech Blog Server](http://localhost:5222)
 
 Use this URL to interact with the API in production.
 
